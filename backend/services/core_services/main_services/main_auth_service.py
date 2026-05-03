@@ -134,8 +134,9 @@ class MainServiceAuth(MainServiceBase):
     @web_exceptions_raiser
     async def login(self, credentials: LoginBody) -> RefreshAccessTokens:
         potential_user = await self._PostgresService.get_user_by_username_or_email(
-            username=credentials.username, email=None
+            username=credentials.username, email=credentials.username
         )
+
         if not potential_user:
             raise InvalidResourceProvided(
                 detail=f"AuthService: User tried to login to not existing account with credentials: {credentials.username}",

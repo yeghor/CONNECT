@@ -24,7 +24,7 @@ const LoginForm = () => {
     const setTokens = useContext(TokensContext).setTokens;
 
     const [ errorMessage, setErrorMessage ] = useState("");
-    const [ username, setUsername ] = useState("");
+    const [ identification, setIdentification ] = useState("");
     const [ password, setPassword ] = useState("");
 
     const [ emailToConfirm, setEmailToConfirm ] = useState<string | null>(null);
@@ -38,7 +38,7 @@ const LoginForm = () => {
         setErrorMessage("");
 
         try {
-            const response = await safeAPICallNoToken<AuthTokensResponse>(fetchLogin, navigate, setErrorMessage, username, password);
+            const response = await safeAPICallNoToken<AuthTokensResponse>(fetchLogin, navigate, setErrorMessage, identification, password);
     
             if (response.success) {
                 if (response.emailToConfirm) {
@@ -75,8 +75,8 @@ const LoginForm = () => {
                             )}
                         <form onSubmit={formHandler} className="space-y-4 md:space-y-6" action="#">
                             <div>
-                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-100 dark:text-white">Username</label>
-                                <input onChange={(event) => setUsername(event.target.value)} type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required={true} />
+                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-100 dark:text-white">Username or Email</label>
+                                <input onChange={(event) => setIdentification(event.target.value)} type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required={true} />
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-100 dark:text-white">Password</label>
