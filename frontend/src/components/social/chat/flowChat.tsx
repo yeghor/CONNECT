@@ -35,7 +35,7 @@ const FlowChat = (chatData: Chat) => {
     if (chatData.chatId) {
         chatLink = chatData.chatId === pathParams.chatId ? undefined : chatLink;
     }
-    console.log(chatLink)
+
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {

@@ -63,6 +63,7 @@ class PostSchema(PostBase):
     is_liked: bool
 
     last_updated: datetime
+    is_my_post: bool
 
     parent_post: PostBase | None
     pictures_urls: List[str]

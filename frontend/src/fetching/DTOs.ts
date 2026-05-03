@@ -1,5 +1,3 @@
-import { displayDayWithTZ as mapDatestringToLocalTz } from "../helpers/dateUtils";
-
 export interface SuccessfulResponse {
     success: true
 }
@@ -190,7 +188,8 @@ interface FeedPostDTO extends ShortPostDTO{
 
 interface LoadPostResponseDTO extends FeedPostDTO{
     text: string,
-    last_updated: string
+    last_updated: string,
+    is_my_post: boolean
 }
 
 type ShortPostsDTO = ShortPostDTO[];
@@ -219,7 +218,8 @@ export interface FeedPost extends ShortPost {
 
 export interface LoadPostResponseInterface extends FeedPost {
     text: string,
-    lastUpdated: Date
+    lastUpdated: Date,
+    isMyPost: boolean
 }
 
 export interface LoadPostResponse extends SuccessfulResponse {
@@ -263,6 +263,7 @@ export const loadPostResponseMapper = (postDTO: LoadPostResponseDTO): LoadPostRe
             replies: postDTO.replies,
             text: postDTO.text,
             lastUpdated: new Date(postDTO.last_updated),
+            isMyPost: postDTO.is_my_post,
             picturesURLs: postDTO.pictures_urls,
             parentPost: postDTO.parent_post
                 ? {

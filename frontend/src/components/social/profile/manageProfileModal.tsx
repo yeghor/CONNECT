@@ -28,6 +28,7 @@ const ManageProfileModal = (props: { avatarURL: string | null, setShowManageProf
     const [ newPassword, setNewPassword ] = useState("");
 
     const [ newAvatarFile, setNewAvatar ] = useState<File | null>(null);
+    const [ newAvatarStatusMessage, setNewAvatarStatusMessage  ] = useState<string | null>("");
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -104,13 +105,16 @@ const ManageProfileModal = (props: { avatarURL: string | null, setShowManageProf
     };
 
     const handleChangeAvatar = async () => {
-        console.log("handling avatar upload, ", newAvatarFile)
         if (!newAvatarFile || !allowChangeAvatar) {
             return;
         }
         console.log(newAvatarFile)
         // File inherits from Blob, we don't need to convert it
-        await safeAPICallPrivate<SuccessfulResponse>(tokens, fetchUploadAvatar, navigate, setWarningMessage, newAvatarFile)
+        const response = await safeAPICallPrivate<SuccessfulResponse>(tokens, fetchUploadAvatar, navigate, setWarningMessage, newAvatarFile);
+
+        if (response.success) {
+            setNewAvatarStatusMessage("Avatar changed succesfully.");
+        }
     };
 
 return (
@@ -129,6 +133,7 @@ return (
                 <div className="p-6 space-y-6">
                     <div className="space-y-3">
                         <label className="block text-sm font-medium text-white/70">Avatar</label>
+                        <p className="py-2 text-white">{newAvatarStatusMessage}</p>
                         <div className="flex items-center gap-4">
                             <img 
                                 className="h-14 w-14 rounded-full border-2 border-white/20 object-cover" 

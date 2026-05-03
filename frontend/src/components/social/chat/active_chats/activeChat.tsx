@@ -147,7 +147,7 @@ const ActiveChat = (props: ActiveChatProps) => {
     }, [props.chatId, props.activeChatData.chatId])
 
     if (!toRender) {
-        return ( <LoadingIndicator customMessage={undefined} /> );
+        return ( <LoadingIndicator customMessage={undefined} centerY={true} /> );
     }
 
     // Passing socket as RefObject<WebSocket> because code above guarantees that it isn't null

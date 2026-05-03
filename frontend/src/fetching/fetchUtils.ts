@@ -90,9 +90,9 @@ export const retryUnauthorizedResponse = async <R>(fetchFunc: CallableFunction, 
 
 
 /*
-* Makes safe API call to private endpoints with access token, validating errors, retrying if 401
-* Do **NOT** pass auth tokens to function in fetchArgs[]
-* */
+Makes safe API call to private endpoints with access token, validating errors, retrying if 401
+Do **NOT** pass auth tokens to function in fetchArgs[]
+*/
 export const safeAPICallPrivate = async <ResponseType>(
     tokens: CookieTokenObject,
     fetchFunc: CallableFunction,
